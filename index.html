@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Noorani Center | Islamic Community – Staten Island</title>
+    <meta name="description"
+        content="Al-Noorani Center is Staten Island's Islamic Community Center offering daily prayer times, Maktab education, Nikah services, counseling, and community support.">
+    <!-- Modern Typography: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- MapLibre GL JS for Interactive Map (open-source WebGL, no API key) -->
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" crossorigin="" />
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" crossorigin=""></script>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">🕌</div>
+                <div class="logo-text">
+                    <h1>Al-Noorani islamic Center</h1>
+                    <span>Islamic Community</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#prayer-times">Prayer Times</a>
+                <a href="#services">Services</a>
+                <a href="#events">Events</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="#donate" class="btn btn-primary">Support Us</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero-section">
+            <div class="hero-overlay"></div>
+
+            <!-- Animated Geometric Shapes -->
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+
+            <!-- Floating Live Status Popup (Top Right) -->
+            <div class="hero-popup popup-top-right animate-on-load">
+                <div class="popup-icon glow-pulse">🕌</div>
+                <div class="popup-content">
+                    <span class="popup-label">Next Prayer</span>
+                    <strong class="popup-text" id="next-prayer-time">Loading...</strong>
+                </div>
+            </div>
+
+            <!-- Floating Fun Fact Popup (Bottom Left) -->
+            <div class="hero-popup popup-bottom-left animate-on-load">
+                <div class="popup-icon glow-pulse">💡</div>
+                <div class="popup-content">
+                    <span class="popup-label">Did you know?</span>
+                    <strong class="popup-text" id="fun-fact-text">Islamic History Fact</strong>
+                </div>
+            </div>
+
+            <!-- Floating Daily Inspiration Popup (Top Left) -->
+            <div class="hero-popup popup-top-left animate-on-load">
+                <div class="popup-icon glow-pulse">🌙</div>
+                <div class="popup-content">
+                    <span class="popup-label">Daily Inspiration</span>
+                    <strong class="popup-text" id="inspiration-text">"Verily, with hardship comes ease." (94:5)</strong>
+                </div>
+            </div>
+
+            <!-- Floating Highlight Event Popup (Bottom Right) -->
+            <div class="hero-popup popup-bottom-right animate-on-load">
+                <div class="popup-icon glow-pulse">🗓️</div>
+                <div class="popup-content">
+                    <span class="popup-label">Coming Up</span>
+                    <strong class="popup-text" id="event-text">Friday Jummah @ 1:30 PM</strong>
+                </div>
+            </div>
+
+            <div class="container hero-content">
+                <span class="bismillah animate-on-load">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</span>
+                <h2 class="hero-title animate-on-load stagger-1">Welcome to Your<br><span
+                        class="highlight typing-text">Spiritual Home</span></h2>
+                <p class="hero-subtitle animate-on-load stagger-2">A place of worship, learning, and community for
+                    everyone.</p>
+                <div class="hero-buttons animate-on-load stagger-3">
+                    <a href="#prayer-times" class="btn btn-primary btn-large btn-glow">Today's Prayer Times</a>
+                    <a href="#about" class="btn btn-secondary btn-large">Learn More</a>
+                </div>
+
+                <!-- Eid Countdown Widget -->
+                <div class="eid-countdown-widget animate-on-load stagger-4" id="eid-countdown-widget">
+                    <div class="eid-shimmer"></div>
+                    <span class="eid-moon">🌙</span>
+                    <div class="eid-body">
+                        <span class="eid-label" id="eid-label">Eid al-Fitr</span>
+                        <div class="eid-timer" id="eid-timer">
+                            <div class="eid-unit">
+                                <strong id="eid-days">--</strong>
+                                <small>days</small>
+                            </div>
+                            <span class="eid-colon">:</span>
+                            <div class="eid-unit">
+                                <strong id="eid-hours">--</strong>
+                                <small>hrs</small>
+                            </div>
+                            <span class="eid-colon">:</span>
+                            <div class="eid-unit">
+                                <strong id="eid-mins">--</strong>
+                                <small>min</small>
+                            </div>
+                            <span class="eid-colon">:</span>
+                            <div class="eid-unit">
+                                <strong id="eid-secs">--</strong>
+                                <small>sec</small>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="eid-badge">Countdown</span>
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- Dynamic Prayer Times Section (Placeholder for JS) -->
+        <section id="prayer-times" class="prayer-times-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>Daily Prayers</h2>
+                    <p>Observe your prayers on time</p>
+                </div>
+
+                <div class="prayer-section-layout animate-on-scroll">
+                    <div class="prayer-board-glass">
+
+                        <div class="location-container">
+                            <div class="location-header">
+                                <span class="location-status" id="location-status">📍 Default: Masjid's Location</span>
+                            </div>
+                            <div class="location-search">
+                                <input type="text" id="location-input" placeholder="Enter your city or address..."
+                                    class="location-input" autocomplete="off">
+                                <button id="search-location-btn" class="btn btn-primary search-btn">Get Times</button>
+                                <button id="gps-location-btn" class="btn btn-secondary search-btn"
+                                    title="Use my current location">📍 My Location</button>
+                                <ul id="autocomplete-results" class="autocomplete-results"></ul>
+                            </div>
+                            <div class="location-error" id="location-error" style="display: none;">Location not found.
+                                Please try again.</div>
+                        </div>
+
+                        <div class="current-date" id="gregorian-date">Loading date...</div>
+                        <div class="hijri-date" id="hijri-date">Loading Hijri...</div>
+
+                        <div class="prayer-grid">
+                            <div class="grid-header">
+                                <div>Prayer</div>
+                                <div>Adhan</div>
+                                <div>Iqamah</div>
+                            </div>
+
+                            <div class="prayer-row" data-prayer="fajr">
+                                <div class="prayer-name">Fajr</div>
+                                <div class="prayer-time adhan" id="fajr-time">--:-- AM</div>
+                                <div class="prayer-time iqamah" id="fajr-iqamah">--:-- AM</div>
+                            </div>
+
+                            <div class="prayer-row" data-prayer="dhuhr">
+                                <div class="prayer-name">Dhuhr</div>
+                                <div class="prayer-time adhan" id="dhuhr-time">--:-- PM</div>
+                                <div class="prayer-time salah" id="dhuhr-salah">1:30 PM</div>
+                            </div>
+
+                            <div class="prayer-row" data-prayer="asr">
+                                <div class="prayer-name">Asr</div>
+                                <div class="prayer-time adhan" id="asr-time">--:-- PM</div>
+                                <div class="prayer-time salah" id="asr-salah">3:30 PM</div>
+                            </div>
+
+                            <div class="prayer-row" data-prayer="maghrib">
+                                <div class="prayer-name">Maghrib</div>
+                                <div class="prayer-time adhan" id="maghrib-time">--:-- PM</div>
+                                <div class="prayer-time iqamah" id="maghrib-iqamah">--:-- PM</div>
+                            </div>
+
+                            <div class="prayer-row" data-prayer="isha">
+                                <div class="prayer-name">Isha</div>
+                                <div class="prayer-time adhan" id="isha-time">--:-- PM</div>
+                                <div class="prayer-time salah" id="isha-salah">7:10 PM</div>
+                            </div>
+
+                            <!-- Special Highlight for Jummah -->
+                            <div class="prayer-row jummah-row">
+                                <div class="prayer-name">Jummah (Friday)</div>
+                                <div class="prayer-time">Khutbah: 1:00 PM</div>
+                                <div class="prayer-time iqamah">Salah: 1:30 PM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Interactive Leaflet Map -->
+                    <div class="prayer-map-glass">
+                        <div id="prayer-map"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-image-wrapper animate-on-scroll stagger-1">
+                        <!-- Placeholder for a beautiful mosque image -->
+                        <div class="about-image-placeholder">
+                            
+                        </div>
+                        <div class="about-stats">
+                            <div class="stat">
+                                <h3>500+</h3>
+                                <p>Congregants</p>
+                            </div>
+                            <div class="stat">
+                                <h3>15+</h3>
+                                <p>Programs</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-content animate-on-scroll stagger-2">
+                        <div class="section-label">Our Story</div>
+                        <h2>A Beacon of <span class="highlight">Light</span> for the Community</h2>
+                        <p>Welcome to al-Noorani Center, where faith meets fellowship. Since our founding, we have been
+                            dedicated to providing a serene environment for worship, comprehensive Islamic education,
+                            and robust community services.</p>
+                        <p>Our goal is to foster a strong, connected, and spiritual community guided by the principles
+                            of the Quran and the Sunnah, promoting peace, understanding, and personal growth for all
+                            ages.</p>
+
+                        <div class="imam-quote">
+                            <blockquote>"The best among you are those who bring greatest benefits to many others."
+                            </blockquote>
+                            <div class="imam-details">
+                                <strong>- Imam syedasif Alizahoori </strong>
+                                <span>Resident Scholar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>Community Services</h2>
+                    <p>Serving your spiritual and social needs</p>
+                </div>
+                    <!-- update this to our timing and price-->
+                <div class="services-grid">
+                    <div class="service-card animate-on-scroll stagger-1" data-modal="true" data-title="Maktab Program"
+                        data-icon="📚"
+                        data-desc="<p>Our Maktab Program is designed for children and youth, focusing on Quranic recitation, memorization, and fundamental Islamic studies including Fiqh, Seerah, Duas, and Akhlaq.</p><br><ul><li><strong>Timings:</strong> Monday to Thursday (5:00 PM - 7:00 PM)</li><li><strong>Ages:</strong> 5 to 15 years old</li><li><strong>Tuition:</strong> $50/month per child</li></ul><br><p>Registrations are currently open. Please contact the administration office or email us to get the registration form.</p>">
+                        <div class="service-icon">📚</div>
+                        <h3>Maktab Program</h3>
+                        <p>Weekend and evening Quranic & Islamic studies for children and youth, building a strong
+                            foundation of faith.</p>
+                        <span class="service-link">Learn More <span>→</span></span>
+                    </div>
+
+                    
+                    <div class="service-card animate-on-scroll stagger-3" data-modal="true" data-title="Counseling"
+                        data-icon="🤝"
+                        data-desc="<p>We believe that spiritual mental well-being is vital. We offer confidential religious and family counseling services provided by our experienced Imam and local professionals.</p><br><ul><li><strong>Family & Marriage Counseling:</strong> Conflict resolution and mediation.</li><li><strong>Youth Counseling:</strong> Navigating identity, peer pressure, and modern challenges.</li><li><strong>Spiritual Guidance:</strong> Personal sessions to answer questions on theology and fiqh.</li></ul><br><p>All sessions are strictly confidential. Appointments must be scheduled in advance through our office.</p>">
+                        <div class="service-icon">🤝</div>
+                        <h3>Counseling</h3>
+                        <p>Confidential religious and family counseling services provided by our experienced Imam and
+                            local professionals.</p>
+                        <span class="service-link">Learn More <span>→</span></span>
+                    </div>
+
+                    <div class="service-card animate-on-scroll stagger-4" data-modal="true" data-title="Food Pantry"
+                        data-icon="🍽️"
+                        data-desc="<p>Our Food Pantry operates every Friday after Jumma prayer, providing essential groceries and meals to families in need within our community. We rely on donations and volunteers to keep this service running.</p><br><ul><li><strong>Who Can Access:</strong> Open to all community members facing food insecurity.</li><li><strong>How to Donate:</strong> We accept non-perishable food items and monetary donations. Please contact us for more details.</li><li><strong>Volunteer Opportunities:</strong> We welcome volunteers to help with sorting, packing, and distribution. Sign up through our office or email us.</li></ul><br><p>Your support helps us ensure that no family in our community goes hungry. Thank you for your generosity!</p>">
+                        <div class="service-icon">🍽️</div>
+                        <h3>Food Pantry</h3>
+                        <p>After jumma prayer.</p>
+                        <span class="service-link">Learn More <span>→</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Modal Structure -->
+        <div class="modal-overlay" id="service-modal">
+            <div class="modal-content">
+                <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+                <div class="modal-header">
+                    <div class="modal-icon" id="modal-icon">✨</div>
+                    <h3 id="modal-title">Service Details</h3>
+                </div>
+                <div class="modal-body" id="modal-desc">
+                    Loading information...
+                </div>
+                <div class="modal-footer">
+                    <a href="#contact" class="btn btn-primary"
+                        onclick="document.getElementById('service-modal').classList.remove('active')">Contact Us for
+                        More Info</a>
+                </div>
+            </div>
+        </div>
+        <!-- Donate Section -->
+        <section id="donate" class="donate-section">
+            <div class="container animate-on-scroll">
+                <div class="donate-glass">
+                    <div class="donate-content">
+                        <div class="section-label">Support Your Masjid</div>
+                        <h2>Invest in your <span class="highlight">Akhirah</span></h2>
+                        <p>Your generous contributions help us maintain the house of Allah, run educational programs,
+                            and support families in need within our community.</p>
+                     <p>Zelle number : 347-200-7728</p>
+                    <p>Or contact 718-496-7441</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <h2>Get in Touch</h2>
+                    <p>We'd love to hear from you</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="info-card animate-on-scroll stagger-1">
+                            <div class="info-icon">📍</div>
+                            <div class="info-text">
+                                <h4>Visit Us</h4>
+                                <p>625 south ave<br>Staten Island, NY 10303</p>
+                            </div>
+                        </div>
+                        <div class="info-card animate-on-scroll stagger-2">
+                            <div class="info-icon">📞</div>
+                            <div class="info-text">
+                                <h4>Call Us</h4>
+                                <p>(718) 496-7441<br>Available 24/7</p>
+                            </div>
+                        </div>
+                        <div class="info-card animate-on-scroll stagger-3">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-text">
+                                <h4>Email Us</h4>
+                                <p>zeshan.ahmad.noorani@gmail.com<br>zeshan.ahmad.noorani@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form animate-on-scroll stagger-2"
+                        onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" required placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Send
+                            Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🕌</div>
+                    <div class="logo-text">
+                        <p class="logo-name">Noor Center</p>
+                        <span>Islamic Community</span>
+                    </div>
+                </a>
+                <p class="footer-desc">A vibrant hub for spiritual growth, education, and community service. Join us in
+                    building a better tomorrow.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                    <a href="#" aria-label="YouTube">▶️</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#prayer-times">Prayer Times</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#donate">Donate</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>📍 625 south ave, staten island, NY</li>
+                    <li>📞 718-496-7441</li>
+                    <li>✉️ zeshan.ahmad.noorani@gmail.com </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 masjid al-noorani. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
